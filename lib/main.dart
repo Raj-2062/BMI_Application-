@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   var w1 = TextEditingController();
   var result = "";
   var info = "";
+  var tcolor;
   @override
   Widget build(BuildContext context) {
 
@@ -69,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
 
                 ),
+                keyboardType: TextInputType.number,
               ),
               SizedBox(
                 height: 20,
@@ -91,8 +93,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       borderRadius:  BorderRadius.circular(12),
                     borderSide: BorderSide(color: Colors.green),
                   ),
-                 
+
                 ),
+                keyboardType: TextInputType.number,
               ),
               Center(
                 child: Padding(
@@ -107,45 +110,55 @@ class _MyHomePageState extends State<MyHomePage> {
                       result = bmi.toStringAsFixed(2);
                       if(bmi < 18.5) {
                         info = "You are UNDERWEIGHT";
+                        tcolor = Colors.red;
+
                       }
                       else if (bmi > 18.5 && bmi < 25 ) {
                         info = "You are in Normal weight";
+                        tcolor = Colors.green;
                       }
                       else if (bmi >= 25 && bmi < 30) {
                         info = "You are OVERWEIGHT";
+                        tcolor = Colors.orangeAccent;
                       }
                       else if (bmi >= 30 && bmi < 35) {
                         info = "You are in Obesity Class I ";
+                        tcolor = Colors.deepOrange;
+
                       }
                       else if (bmi >= 35 && bmi < 40) {
                         info = "You are Obesity Class II";
+                        tcolor = Colors.redAccent;
                       }
                       else if (bmi >= 40) {
                         info = "You are Obesity Class III";
+                        tcolor = Colors.red;
                       }
 
                     } catch (e) {
                       result = "Invalid input";
+                      info = "Invalid input";
+                      tcolor= null;
                     }
                     setState(() {});
                   },
                       child:Text("Click For BMI") ),
                 ),
               ),
-              Padding(
+              Center(
+                child: Padding(
 
-                padding: const EdgeInsets.all(10.0),
-                child: Text("The  BMI is $result",style: TextStyle(fontSize: 17,color:Colors.black),),
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text("The  BMI is $result",style: TextStyle(fontSize: 17,color:Colors.black),),
+                ),
               ),
 
-              SizedBox(
-                height: 20,
 
-
-              ),
-              Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: Text(info,style: TextStyle(fontSize: 17, color: Colors.black),),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(6.0),
+                  child: Text(info,style: TextStyle(fontSize: 17, color: tcolor),),
+                ),
               )
 
             ],
